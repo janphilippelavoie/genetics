@@ -8,3 +8,7 @@ class Chromosome:
     @abstractmethod
     def get_fitness(self):
         pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
