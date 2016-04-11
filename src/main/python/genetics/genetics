@@ -1,0 +1,66 @@
+import random
+
+__author__ = 'ejanlav'
+
+
+#
+# #define CROSSOVER_RATE            0.7
+# #define MUTATION_RATE             0.001
+# #define POP_SIZE                  100			//must be an even number
+# #define CHROMO_LENGTH             300
+# #define GENE_LENGTH               4
+# #define MAX_ALLOWABLE_GENERATIONS	400
+#
+# //returns a float between 0 & 1
+# #define RANDOM_NUM		((float)rand()/(RAND_MAX+1))
+#
+# //----------------------------------------------------------------------------------------
+# //
+# //	define a data structure which will define a chromosome
+# //
+# //----------------------------------------------------------------------------------------
+# struct chromo_typ
+# {
+# 	//the binary bit string is held in a std::string
+#   string	bits;
+#
+# 	float	  fitness;
+#
+# 	chromo_typ(): bits(""), fitness(0.0f){};
+# 	chromo_typ(string bts, float ftns): bits(bts), fitness(ftns){}
+# };
+#
+#
+# /////////////////////////////////prototypes/////////////////////////////////////////////////////
+#
+# void    PrintGeneSymbol(int val);
+# string  GetRandomBits(int length);
+# int     BinToDec(string bits);
+# void    PrintChromo(string bits);
+# void    PrintGeneSymbol(int val);
+# int     ParseBits(string bits, int* buffer);
+# void    Mutate(string &bits);
+# void    Crossover(string &offspring1, string &offspring2);
+#
+#
+
+class Genetics:
+
+    #TODO move this over config file (maybe YAML?)
+    CROSSOVER_RATE = 0.7
+    MUTATION_RATE = 0.001
+    POP_SIZE = 100
+    MAX_ALLOWABLE_GENERATIONS = 400
+
+    @staticmethod
+    def roulette_selection(population):
+        fitness_sum = 0
+        for chromosome in population:
+            fitness_sum += chromosome.get_fitness()
+
+        random_value = random.random() * fitness_sum
+
+        for chromosome in population:
+            random_value -= chromosome.get_fitness
+            if fitness_sum < 0:
+                return chromosome
