@@ -14,10 +14,9 @@ class EquationFactory(ChromosomeFactory):
 
     def create_random_chromosome(self):
         chromosome_string = ''
-        for index in xrange(EquationChromosome.NUMBER_OF_GENES):
+        for index in xrange(EquationChromosome.NUMBER_OF_GENES * EquationChromosome.GENE_LENGTH):
             chromosome_string += random.choice(['0', '1'])
         return self.create_chromosome(chromosome_string)
-
 
 
 

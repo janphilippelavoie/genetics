@@ -10,6 +10,6 @@ class ChromosomeFactory:
         pass
 
     @abstractmethod
-    def create_chromosome(self, targets):
+    def create_chromosome(self, bits):
         pass
 

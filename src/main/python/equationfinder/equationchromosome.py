@@ -6,7 +6,7 @@ __author__ = 'ejanlav'
 class EquationChromosome(Chromosome):
 
     GENE_LENGTH = 4
-    NUMBER_OF_GENES = 9
+    NUMBER_OF_GENES = 18
 
     # TODO find better name for chromosome_string
     def __init__(self, chromosome_string, target_value):
@@ -30,12 +30,15 @@ class EquationChromosome(Chromosome):
                 printable += str(element) + " "
         return "{}= {}".format(printable, self._evaluate_equation())
 
+    def get_fitness(self):
+        return self._fitness
+
+    def get_bits(self):
+        return self._chromosome_string
+
     def _get_genes(self):
         for i in xrange(0, len(self._chromosome_string), self.GENE_LENGTH):
             yield self._chromosome_string[i:i+self.GENE_LENGTH]
-
-    def get_fitness(self):
-        return self._fitness
 
     def _evaluate_equation(self):
         equation_list = self._trim_chromosome()
@@ -60,7 +63,7 @@ class EquationChromosome(Chromosome):
         return result
 
     def _assign_fitness(self):
-        return 1./abs(self._evaluate_equation() - self._target_value)
+        return 1./(1 + abs(self._evaluate_equation() - self._target_value))
 
     def _trim_chromosome(self):
         looking_for_operator = False
@@ -77,7 +80,3 @@ class EquationChromosome(Chromosome):
             return result
         else:
             return result[0:-1]
-
-if __name__ == '__main__':
-    eq = EquationChromosome('011010100101110001001101001010100001', 27)
-    print(eq.get_fitness())

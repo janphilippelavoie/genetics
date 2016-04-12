@@ -10,5 +10,9 @@ class Chromosome:
         pass
 
     @abstractmethod
+    def get_bits(self):
+        pass
+
+    @abstractmethod
     def __str__(self):
         pass
