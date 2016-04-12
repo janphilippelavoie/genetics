@@ -6,6 +6,7 @@ __author__ = 'ejanlav'
 class EquationChromosome(Chromosome):
 
     GENE_LENGTH = 4
+    NUMBER_OF_GENES = 9
 
     # TODO find better name for chromosome_string
     def __init__(self, chromosome_string, target_value):
@@ -66,7 +67,7 @@ class EquationChromosome(Chromosome):
         result = []
         for gene in self._get_genes():
             decimal_value = int(gene, 2)
-            if decimal_value in range(0, 10) and not looking_for_operator:
+            if decimal_value in range(1, 10) and not looking_for_operator:
                 result.append(decimal_value)
                 looking_for_operator = True
             elif decimal_value in range(10, 14) and looking_for_operator:
